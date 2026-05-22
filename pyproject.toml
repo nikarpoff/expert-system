@@ -1,0 +1,21 @@
+[project]
+name = "expert-system"
+version = "0.1.0"
+description = "Probabilistic medical expert system with PyQt6 and PostgreSQL"
+requires-python = ">=3.12"
+dependencies = [
+  "sqlalchemy>=2.0",
+  "psycopg[binary]>=3.2",
+  "pydantic>=2.7",
+  "pydantic-settings>=2.3",
+  "python-dotenv>=1.0",
+  "loguru>=0.7",
+  "PyQt6>=6.7"
+]
+
+[project.scripts]
+expert-system = "app.main:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
