@@ -80,14 +80,14 @@ class MainWindow(QMainWindow):
         if self.state.probabilities[best_id] >= settings.decision_threshold:
             self.finish_diagnosis(best_id)
 
-    def finish_diagnosis(self, forced_id: int | None = None):
+    def finish_diagnosis(self, forced_id: str | None = None):
         if not self.state.probabilities:
             QMessageBox.information(self, 'Итог', 'Диагнозы были исключены.')
             return
         best_id = forced_id or max(self.state.probabilities, key=self.state.probabilities.get)
         best = self.diagnosis_service.diagnosis_by_id[best_id]
         prob = self.state.probabilities[best_id]
-        QMessageBox.information(self, 'Результат', f'Наиболее вероятный диагноз: {best.name}\nВероятность: {prob:.4f}\nРекомендация: {best.recommendation}')
+        QMessageBox.information(self, 'Результат', f'Наиболее вероятный диагноз: {best.name}\nВероятность: {prob:.4f}')
 
     def update_results(self):
         rows = ['Текущие вероятности диагнозов:']
