@@ -1,8 +1,8 @@
 def select_most_informative_symptom(
-    pending_symptoms: set[int],
-    active_diagnoses: set[int],
-    rules_map: dict[int, dict[int, object]],
-) -> int | None:
+    pending_symptoms: set[str],
+    active_diagnoses: set[str],
+    rules_map: dict[str, dict[str, object]],
+) -> str | None:
     best_symptom = None
     best_score = -1
     for symptom_id in pending_symptoms:

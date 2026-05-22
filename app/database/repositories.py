@@ -16,9 +16,9 @@ class KnowledgeRepository:
     def load_symptoms(self) -> list[Symptom]:
         return list(self.session.scalars(select(Symptom)))
 
-    def load_rules_map(self) -> dict[int, dict[int, Rule]]:
+    def load_rules_map(self) -> dict[str, dict[str, Rule]]:
         rules = self.session.scalars(select(Rule)).all()
-        data: dict[int, dict[int, Rule]] = defaultdict(dict)
+        data: dict[str, dict[str, Rule]] = defaultdict(dict)
         for rule in rules:
             data[rule.diagnosis_id][rule.symptom_id] = rule
         return dict(data)

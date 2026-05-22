@@ -14,9 +14,9 @@ class StepTrace:
 
 @dataclass
 class EngineState:
-    probabilities: dict[int, float]
-    active_diagnoses: set[int]
-    pending_symptoms: set[int]
+    probabilities: dict[str, float]
+    active_diagnoses: set[str]
+    pending_symptoms: set[str]
     traces: list[StepTrace] = field(default_factory=list)
 
 
@@ -32,10 +32,10 @@ class BayesEngine:
         all_symptoms = set(self.symptom_by_id.keys())
         return EngineState(probabilities=probs, active_diagnoses=set(probs), pending_symptoms=all_symptoms)
 
-    def choose_next_symptom(self, state: EngineState) -> int | None:
+    def choose_next_symptom(self, state: EngineState) -> str | None:
         return select_most_informative_symptom(state.pending_symptoms, state.active_diagnoses, self.rules_map)
 
-    def apply_answer(self, state: EngineState, symptom_id: int, answer_yes: bool) -> None:
+    def apply_answer(self, state: EngineState, symptom_id: str, answer_yes: bool) -> None:
         for d_id in list(state.active_diagnoses):
             rule = self.rules_map.get(d_id, {}).get(symptom_id)
             if not rule:
